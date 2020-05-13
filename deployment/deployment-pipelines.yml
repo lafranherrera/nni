@@ -109,6 +109,7 @@ jobs:
 
   - script: |
       cd deployment/pypi
+      ls dist/
       export SDK_VERSION=`python3 -c 'import nni; print(nni.__version__)'`
       echo $SDK_VERSION
       if [[ $SDK_VERSION = $(build_version) ]]; then
