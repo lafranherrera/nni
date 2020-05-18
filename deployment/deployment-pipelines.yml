@@ -107,21 +107,6 @@ jobs:
     condition: eq( variables['build_docker_img'], 'true')
     displayName: 'build and upload nni docker image'
 
-  - script: |
-      cd deployment/pypi
-      export WHEEL_FILE=`ls dist/`
-      echo "pip install dist/$WHEEL_FILE"
-      pip install dist/$WHEEL_FILE
-      export SDK_VERSION=`python3 -c 'import nni; print(nni.__version__)'`
-      echo $SDK_VERSION
-      if [[ $SDK_VERSION = $(build_version) ]]; then
-        echo 'SDK version match build version'
-      else
-        echo 'SDK version does not match build version'
-        exit 1
-      fi
-    displayName: 'Validate SDK version'
-
 
 - job: 'Build_upload_nni_macos'
   dependsOn: version_number_validation
